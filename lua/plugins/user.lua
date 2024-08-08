@@ -1,8 +1,3 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
--- You can also add or configure plugins by creating files in this `plugins/` folder
--- Here are some examples:
-
 ---@type LazySpec
 return {
 
@@ -21,26 +16,33 @@ return {
   {
     "goolord/alpha-nvim",
     opts = function(_, opts)
-      -- customize the dashboard header
-      opts.section.header.val = {
-        " █████  ███████ ████████ ██████   ██████",
-        "██   ██ ██         ██    ██   ██ ██    ██",
-        "███████ ███████    ██    ██████  ██    ██",
-        "██   ██      ██    ██    ██   ██ ██    ██",
-        "██   ██ ███████    ██    ██   ██  ██████",
-        " ",
-        "    ███    ██ ██    ██ ██ ███    ███",
-        "    ████   ██ ██    ██ ██ ████  ████",
-        "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-        "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-        "    ██   ████   ████   ██ ██      ██",
+      require "alpha"
+      local dashboard = require "alpha.themes.dashboard"
+      dashboard.section.header.val = require("dashboard-images").au5yDog
+      dashboard.section.header.padding = 0
+      local get_icon = require("astroui").get_icon
+      dashboard.section.buttons.val = {
+        opts.button("LDR S l", get_icon("Refresh", 2, true) .. "Last Session  "),
+        opts.button("LDR S f", "󰨭  " .. "Find Session  "),
+        opts.button("LDR f f", get_icon("Search", 2, true) .. "Find File  "),
+        opts.button("LDR f w", get_icon("WordFile", 2, true) .. "Find Word  "),
       }
+      dashboard.config.layout = {
+        { type = "padding", val = 3 },
+        dashboard.section.header,
+        { type = "padding", val = 2 },
+        dashboard.section.buttons,
+        { type = "padding", val = 3 },
+        dashboard.section.footer,
+      }
+      require("alpha").setup(opts.config)
+
       return opts
     end,
   },
 
   -- You can disable default plugins as follows:
-  { "max397574/better-escape.nvim", enabled = false },
+  { "max397574/better-escape.nvim", enabled = true },
 
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   {
