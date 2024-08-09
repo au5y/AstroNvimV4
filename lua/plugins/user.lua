@@ -23,9 +23,9 @@ return {
       local get_icon = require("astroui").get_icon
       dashboard.section.buttons.val = {
         opts.button("LDR S l", get_icon("Refresh", 2, true) .. "Last Session  "),
-        opts.button("LDR S f", "󰨭  " .. "Find Session  "),
-        opts.button("LDR f f", get_icon("Search", 2, true) .. "Find File  "),
-        opts.button("LDR f w", get_icon("WordFile", 2, true) .. "Find Word  "),
+        opts.button("LDR S f", get_icon("Search", 2, true) .. "Find Session  "),
+        opts.button("LDR f f", get_icon("FolderOpen", 2, true) .. "Find File  "),
+        opts.button("LDR f w", get_icon("Ellipsis", 2, true) .. "Find Word  "),
       }
       dashboard.config.layout = {
         { type = "padding", val = 3 },
